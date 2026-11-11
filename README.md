@@ -1,41 +1,47 @@
 
-# DIAGRAM ARSITEKTUR CLOUD DIGITAL KAMPUS
+# GAMBARAN SKALABILITAS CLOUD DIGITAL KAMPUS
 
 ```mermaid
 flowchart TD
+    A["500 - 5.000 Pengguna"]
+    B["Internet"]
+    C["Firewall / WAF"]
+    D["Load Balancer"]
+    E["Auto Scaling"]
 
-    A["Mahasiswa"]
-    B["Dosen"]
-    C["Administrator"]
-
-    A --> D["Internet"]
-    B --> D
+    A --> B
+    B --> C
     C --> D
+    D --> E
 
-    D --> E["DNS"]
-    E --> F["Firewall / WAF"]
-    F --> G["Load Balancer"]
+    E --> F["Application Server 1"]
+    E --> G["Application Server 2"]
+    E --> H["Application Server 3"]
+    E --> I["Server Tambahan"]
 
-    G --> H["Application Server 1"]
-    G --> I["Application Server 2"]
-    G --> J["Application Server 3"]
+    F --> J["Aplikasi Digital Kampus"]
+    G --> J
+    H --> J
+    I --> J
 
-    H --> K["Aplikasi Digital Kampus"]
-    I --> K
-    J --> K
+    J --> K["Database Cloud"]
+    K --> L["Caching"]
+    K --> M["Backup Storage"]
 
-    K --> L["Database Cloud"]
-    L --> M["Backup Storage"]
+    N["Monitoring Sistem"]
+    N --> O["CPU Usage"]
+    N --> P["RAM Usage"]
+    N --> Q["Network Traffic"]
 
-    H --> N["Monitoring System"]
-    I --> N
-    J --> N
-    L --> N
+    O --> R["Evaluasi Kapasitas Server"]
+    P --> R
+    Q --> R
 
-    N --> O["Prometheus"]
-    O --> P["Grafana Dashboard"]
+    R -.-> E
 
-    subgraph CLOUD["PUBLIC CLOUD - PAAS"]
+    subgraph CLOUD["INFRASTRUKTUR PUBLIC CLOUD"]
+        C
+        D
         E
         F
         G
@@ -48,14 +54,14 @@ flowchart TD
         N
         O
         P
+        Q
+        R
     end
 
     style A fill:#dbeafe,stroke:#2563eb,color:#000
-    style B fill:#dbeafe,stroke:#2563eb,color:#000
-    style C fill:#dbeafe,stroke:#2563eb,color:#000
-    style F fill:#fee2e2,stroke:#dc2626,color:#000
-    style G fill:#fef3c7,stroke:#d97706,color:#000
-    style L fill:#dcfce7,stroke:#16a34a,color:#000
-    style M fill:#ede9fe,stroke:#7c3aed,color:#000
-    style P fill:#cffafe,stroke:#0891b2,color:#000
+    style D fill:#fef3c7,stroke:#d97706,color:#000
+    style E fill:#dcfce7,stroke:#16a34a,color:#000
+    style K fill:#ede9fe,stroke:#7c3aed,color:#000
+    style M fill:#fce7f3,stroke:#db2777,color:#000
+    style R fill:#cffafe,stroke:#0891b2,color:#000
 ```
