@@ -1,42 +1,42 @@
 
-# DIAGRAM ALUR SOP PEMELIHARAAN INFRASTRUKTUR CLOUD
+# DIAGRAM PIPELINE CI/CD
 
 ```mermaid
 flowchart TD
-    A([Mulai]) --> B["Melakukan Pemeriksaan Sistem"]
-    B --> C["Memeriksa CPU, RAM, Penyimpanan, dan Jaringan"]
-    C --> D{"Apakah Sistem Berjalan Normal?"}
+    A([Mulai]) --> B["Developer Menulis Kode Program"]
+    B --> C["Menyimpan dan Push Kode ke GitHub"]
+    C --> D["GitHub Actions Menjalankan Pipeline"]
+    
+    D --> E["Build Aplikasi"]
+    E --> F{"Build Berhasil?"}
 
-    D -- "Ya" --> E["Melakukan Pemantauan Sistem"]
-    E --> F["Memeriksa Log Aktivitas dan Keamanan"]
-    F --> G["Melakukan Backup Data"]
-    G --> H["Mencatat Hasil Pemeliharaan"]
-    H --> I["Membuat Laporan Pemeliharaan"]
-    I --> J([Selesai])
+    F -- "Tidak" --> G["Memperbaiki Kesalahan Kode"]
+    G --> B
 
-    D -- "Tidak" --> K["Mengidentifikasi Gangguan"]
-    K --> L["Menganalisis Penyebab Gangguan"]
-    L --> M["Melakukan Perbaikan Sistem"]
-    M --> N{"Apakah Gangguan Berhasil Diatasi?"}
+    F -- "Ya" --> H["Menjalankan Unit Testing"]
+    H --> I{"Testing Berhasil?"}
 
-    N -- "Ya" --> O["Melakukan Pengujian Sistem"]
-    O --> P["Memastikan Sistem Kembali Normal"]
-    P --> G
+    I -- "Tidak" --> G
+    I -- "Ya" --> J["Membangun Docker Image"]
 
-    N -- "Tidak" --> Q["Melaporkan kepada Tim Teknis"]
-    Q --> R["Melakukan Penanganan Lanjutan"]
-    R --> O
+    J --> K["Mengirim Image ke Container Registry"]
+    K --> L["Deploy Aplikasi ke Cloud"]
+    L --> M["Menjalankan Integration Testing"]
+    M --> N{"Aplikasi Berjalan Normal?"}
 
-    S["Memeriksa Pembaruan Keamanan"] --> T["Melakukan Update Sistem Jika Diperlukan"]
-    T --> E
+    N -- "Tidak" --> O["Melakukan Perbaikan dan Deployment Ulang"]
+    O --> B
 
-    B --> S
+    N -- "Ya" --> P["Monitoring Aplikasi"]
+    P --> Q["Evaluasi Performa dan Keamanan"]
+    Q --> R([Selesai])
 
     style A fill:#dcfce7,stroke:#16a34a,color:#000
-    style J fill:#dcfce7,stroke:#16a34a,color:#000
-    style D fill:#fef3c7,stroke:#d97706,color:#000
+    style R fill:#dcfce7,stroke:#16a34a,color:#000
+    style F fill:#fef3c7,stroke:#d97706,color:#000
+    style I fill:#fef3c7,stroke:#d97706,color:#000
     style N fill:#fef3c7,stroke:#d97706,color:#000
-    style K fill:#fee2e2,stroke:#dc2626,color:#000
-    style M fill:#dbeafe,stroke:#2563eb,color:#000
-    style G fill:#ede9fe,stroke:#7c3aed,color:#000
+    style D fill:#dbeafe,stroke:#2563eb,color:#000
+    style K fill:#ede9fe,stroke:#7c3aed,color:#000
+    style L fill:#cffafe,stroke:#0891b2,color:#000
 ```
