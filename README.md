@@ -1,67 +1,42 @@
 
-# GAMBARAN SKALABILITAS CLOUD DIGITAL KAMPUS
+# DIAGRAM ALUR SOP PEMELIHARAAN INFRASTRUKTUR CLOUD
 
 ```mermaid
 flowchart TD
-    A["500 - 5.000 Pengguna"]
-    B["Internet"]
-    C["Firewall / WAF"]
-    D["Load Balancer"]
-    E["Auto Scaling"]
+    A([Mulai]) --> B["Melakukan Pemeriksaan Sistem"]
+    B --> C["Memeriksa CPU, RAM, Penyimpanan, dan Jaringan"]
+    C --> D{"Apakah Sistem Berjalan Normal?"}
 
-    A --> B
-    B --> C
-    C --> D
-    D --> E
+    D -- "Ya" --> E["Melakukan Pemantauan Sistem"]
+    E --> F["Memeriksa Log Aktivitas dan Keamanan"]
+    F --> G["Melakukan Backup Data"]
+    G --> H["Mencatat Hasil Pemeliharaan"]
+    H --> I["Membuat Laporan Pemeliharaan"]
+    I --> J([Selesai])
 
-    E --> F["Application Server 1"]
-    E --> G["Application Server 2"]
-    E --> H["Application Server 3"]
-    E --> I["Server Tambahan"]
+    D -- "Tidak" --> K["Mengidentifikasi Gangguan"]
+    K --> L["Menganalisis Penyebab Gangguan"]
+    L --> M["Melakukan Perbaikan Sistem"]
+    M --> N{"Apakah Gangguan Berhasil Diatasi?"}
 
-    F --> J["Aplikasi Digital Kampus"]
-    G --> J
-    H --> J
-    I --> J
+    N -- "Ya" --> O["Melakukan Pengujian Sistem"]
+    O --> P["Memastikan Sistem Kembali Normal"]
+    P --> G
 
-    J --> K["Database Cloud"]
-    K --> L["Caching"]
-    K --> M["Backup Storage"]
+    N -- "Tidak" --> Q["Melaporkan kepada Tim Teknis"]
+    Q --> R["Melakukan Penanganan Lanjutan"]
+    R --> O
 
-    N["Monitoring Sistem"]
-    N --> O["CPU Usage"]
-    N --> P["RAM Usage"]
-    N --> Q["Network Traffic"]
+    S["Memeriksa Pembaruan Keamanan"] --> T["Melakukan Update Sistem Jika Diperlukan"]
+    T --> E
 
-    O --> R["Evaluasi Kapasitas Server"]
-    P --> R
-    Q --> R
+    B --> S
 
-    R -.-> E
-
-    subgraph CLOUD["INFRASTRUKTUR PUBLIC CLOUD"]
-        C
-        D
-        E
-        F
-        G
-        H
-        I
-        J
-        K
-        L
-        M
-        N
-        O
-        P
-        Q
-        R
-    end
-
-    style A fill:#dbeafe,stroke:#2563eb,color:#000
+    style A fill:#dcfce7,stroke:#16a34a,color:#000
+    style J fill:#dcfce7,stroke:#16a34a,color:#000
     style D fill:#fef3c7,stroke:#d97706,color:#000
-    style E fill:#dcfce7,stroke:#16a34a,color:#000
-    style K fill:#ede9fe,stroke:#7c3aed,color:#000
-    style M fill:#fce7f3,stroke:#db2777,color:#000
-    style R fill:#cffafe,stroke:#0891b2,color:#000
+    style N fill:#fef3c7,stroke:#d97706,color:#000
+    style K fill:#fee2e2,stroke:#dc2626,color:#000
+    style M fill:#dbeafe,stroke:#2563eb,color:#000
+    style G fill:#ede9fe,stroke:#7c3aed,color:#000
 ```
